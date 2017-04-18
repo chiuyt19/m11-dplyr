@@ -35,14 +35,16 @@ mean(sea$gain_time,na.rm = TRUE)
 # Write a function that allows you to specify an origin, a destination, and a column of interest
 # that returns a data.frame of flights from the origin to the destination and only the column of interest
 ## Hint: see chapter 11 section on standard evaluation
-sliceData<- function(my_ori,my_dest,my_col){
-  return(data.frame(flights %>% filter(origin==my_ori) %>% filter(dest==my_dest) %>% select(my_col)))
+sliceData<- function(my_ori,my_dest,col){
+  return(flights %>% filter(origin==my_ori,dest==my_dest) %>% select_(col))
 }
 
 # Retireve the air_time column for flights from JFK to SEA
-sliceData("JFK","SEA",air_time)
+sliceData("JFK","SEA","air_time")
 
 # What was the average air time of those flights (in hours)?  
-
-
+new.data<-sliceData("JFK","SEA","air_time")
+mean(new.data$air_time/60, na.rm = TRUE)
 # What was the min/max average air time for the JFK to SEA flights?
+min(new.data$air_time, na.rm = TRUE)
+max(new.data$air_time, na.rm = TRUE)
