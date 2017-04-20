@@ -23,15 +23,15 @@ str(pulitzer)
 
 # Add a column in a dataframe called 'Pulitzer.Prize.Change` that contains the diffrence in changes
 # in Pulitzer Prize Winners from 2004 to 2013 and Pultizer Prize Winners from 1990 to 2003.
-Pulitzer.Prize.Change
+Pulitzer.Prize.Change<-mutate(pulitzer,diff.1990.2014=Pulitzer.Prize.Winners.and.Finalists..2004.2014 - Pulitzer.Prize.Winners.and.Finalists..1990.2003)
 
 # What publication gained the most pulitzer prizes from 2004-2014?
 # Be sure to use the pipe operator! 
-
+most.prize<-pulitzer %>% filter(Pulitzer.Prize.Winners.and.Finalists..2004.2014==max(Pulitzer.Prize.Winners.and.Finalists..2004.2014)) %>%  select(Newspaper)
 
 # Which publication with at least 5 Pulitzers won from 2004-2014 had the biggest decrease(negative) in Daily circulation numbers? 
 # This publication should have Pulitzer prizes won a minimum of 5 Pulitzers, as well as the biggest decrease in circulation
-
+decrease<-pulitzer %>% filter(Pulitzer.Prize.Winners.and.Finalists..2004.2014>=5) %>% filter(Change.in.Daily.Circulation..2004.2013==min(Change.in.Daily.Circulation..2004.2013)) %>% select(Newspaper)
 
 # Your turn! An important part about being a data scientist is asking questions. 
 # Create a question and use dplyr to figure out the answer.  
